@@ -1,4 +1,6 @@
-class this.AdImpression
+exports = exports || this
+
+class AdImpression
     constructor: (@element) ->
       @_viewed = false;
       @top = element.offsetTop
@@ -11,19 +13,16 @@ class this.AdImpression
         @top += element.offsetTop
         @left += element.offsetLeft
 
-      window.onscroll = ->
-        @isVisible()
-
-      @isVisible()
+      window.onscroll = =>
+        @viewed()
 
     viewed: ->
-      @isVisible()
-
-    isVisible: =>
       result = @top >= window.pageYOffset && @left >= window.pageXOffset && (@top + @height) <= (window.pageYOffset + window.innerHeight) && (@left + @width) <= (window.pageXOffset + window.innerWidth)
       if result is true
         @_viewed = true
       @_viewed
+
+exports.AdImpression = AdImpression
 
 
 
